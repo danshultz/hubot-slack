@@ -122,8 +122,9 @@ class Slack extends Adapter
     self.robot.router.post "/hubot/slack-webhook", (req, res) ->
       self.log "Incoming message received"
 
-      hubotMsg = self.getMessageFromRequest req
-      author = self.getAuthorFromRequest req
+      hubotMsg = self.getMessageFromRequest(req)
+      author = self.getAuthorFromRequest(req)
+      user = self.robot.brain.userForId(author.id, author.name)
 
       if hubotMsg and author
         # Pass to the robot
